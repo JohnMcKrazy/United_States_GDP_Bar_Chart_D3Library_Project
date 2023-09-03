@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 bar.addEventListener("mouseover", () => {
                     console.log(bar.getAttribute("index"), bar.getAttribute("data-date"), bar.getAttribute("data-gdp"));
                     tooltip.style.opacity = 100;
+                    tooltip.setAttribute("data-date", bar.getAttribute("data-date"));
                     gdpText.textContent = bar.getAttribute("data-gdp");
                     quarterText.textContent = toolTipData[bar.getAttribute("index")];
                     /* quarterText.textContet =  */
