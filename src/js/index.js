@@ -2,10 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //^ CHART CONTAINER DECLARATION//
     const container = document.querySelector(".chart_container");
 
+    const tooltip = document.querySelector("#tooltip");
+    const gdpText = document.querySelector("#tooltip_text_gdp");
+    const quarterText = document.querySelector("#tooltip_text_quarter");
     //^ DIMENTIONS //
     const width = 800;
     const height = 400;
-    const barW = width / 275;
     const heightMargin = 60;
     //^ SVG CREATION//
 
@@ -24,14 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .text("Timeline")
         .attr("class", "years_info");
 
-    //^ TOOLTIP CREATION  */
-
-    let tooltip = d3.select(container).append("div").attr("id", "tooltip").style("opacity", 0);
-
-    //^ overlay CREATION  */
-
-    let overlay = d3.select(container).append("div").attr("class", "overlay").style("opacity", 0);
-
     //! FETCHING DATA FUNCTION START//
     const fetching = async () => {
         //^  FETCHING DATA  //
@@ -43,20 +37,24 @@ document.addEventListener("DOMContentLoaded", () => {
         //^  BASIC DATA  //
         const basicData = rawData.data;
         console.log(basicData);
-
+        const dataLenght = basicData.length;
         //^ TOOLTIP DATA  //
         const toolTipData = basicData.map((item) => {
             let quarter;
             let temp = item[0].substring(5, 7);
-
-            if (temp === "01") {
-                quarter = "First Quarter";
-            } else if (temp === "04") {
-                quarter = "Second Quarter";
-            } else if (temp === "07") {
-                quarter = "Thirt Quarter";
-            } else if (temp === "10") {
-                quarter = "Forth Quarter";
+            switch (temp) {
+                case "01":
+                    quarter = "1st Quarter";
+                    break;
+                case "04":
+                    quarter = "2nd Quarter";
+                    break;
+                case "07":
+                    quarter = "3th Quarter";
+                    break;
+                case "10":
+                    quarter = "4th Quarter";
+                    break;
             }
 
             return item[0].substring(0, 4) + " " + quarter;
@@ -101,10 +99,26 @@ document.addEventListener("DOMContentLoaded", () => {
             .attr("class", "bar")
             .attr("x", (d, i) => xScale(yearsDate[i]))
             .attr("y", (d) => height - d)
-            .attr("width", barW)
+            .attr("width", width / dataLenght)
             .attr("height", (d) => d)
             .attr("index", (d, i) => i)
             .attr("transform", `translate(${heightMargin},0)`);
+
+        setTimeout(() => {
+            const bars = document.querySelectorAll(".bar");
+            bars.forEach((bar) => {
+                bar.addEventListener("mouseover", () => {
+                    console.log(bar.getAttribute("index"), bar.getAttribute("data-date"), bar.getAttribute("data-gdp"));
+                    tooltip.style.opacity = 100;
+                    gdpText.textContent = bar.getAttribute("data-gdp");
+                    quarterText.textContent = toolTipData[bar.getAttribute("index")];
+                    /* quarterText.textContet =  */
+                });
+                bar.addEventListener("mouseout", () => {
+                    tooltip.style.opacity = 0;
+                });
+            });
+        }, 250);
     };
     //! FETCHING DATA FUNCTION OVER//
 
