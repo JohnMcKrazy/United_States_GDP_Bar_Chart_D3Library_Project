@@ -10,6 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script type="module" charset="utf-8" src="./src/js/index.js"></script>
+        <!-- ! D3 LIBRARY CDN -->
         <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
         <!-- ! GOOGLE FONT START-->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,7 +23,7 @@
         <div class="chart_board">
             <h1 id="title">United States GDP</h1>
             <div class="chart_container">
-                <div id="tooltip">
+                <div id="tooltip" data-date="">
                     <p class="tooltip_text" id="tooltip_text_quarter"></p>
                     <p class="tooltip_text">$<span id="tooltip_text_gdp">0</span> Billion</p>
                 </div>
@@ -32,6 +33,6 @@
                 <a class="italic_text" href="http://www.bea.gov/national/pdf/nipaguid.pdf" alt="" target="_blank">http://www.bea.gov/national/pdf/nipaguid.pdf</a>
             </div>
         </div>
-        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+        <!--  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
     </body>
 </html>

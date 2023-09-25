@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .attr("width", width + 100)
         .attr("height", height + heightMargin);
 
+    //^ SVG VERTICAL TEXT CREATION//
     graphContainer.append("text").attr("transform", "rotate(-90)").attr("x", -200).attr("y", 80).text("Gross Domestic Product");
+    //^ SVG HORIZONTAL TEXT CREATION//
 
     graphContainer
         .append("text")
